@@ -83,14 +83,14 @@ LOG = logging.getLogger(__name__)
 
 @test_properties.accepts_baseline
 def report(manager, fileobj, sev_level, conf_level, lines=-1):
-    '''''Prints issues in JSON format
+    """Prints issues in JSON format.
 
     :param manager: the bandit manager object
     :param fileobj: The output file object, which may be sys.stdout
     :param sev_level: Filtering severity level
     :param conf_level: Filtering confidence level
     :param lines: Number of lines to report, -1 for all
-    '''
+    """
 
     machine_output = {'results': [], 'errors': []}
     for (fname, reason) in manager.get_skipped():

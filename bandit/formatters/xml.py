@@ -41,14 +41,14 @@ LOG = logging.getLogger(__name__)
 
 
 def report(manager, fileobj, sev_level, conf_level, lines=-1):
-    '''Prints issues in XML format
+    """Prints issues in XML format.
 
     :param manager: the bandit manager object
     :param fileobj: The output file object, which may be sys.stdout
     :param sev_level: Filtering severity level
     :param conf_level: Filtering confidence level
     :param lines: Number of lines to report, -1 for all
-    '''
+    """
 
     issues = manager.get_issue_list(sev_level=sev_level, conf_level=conf_level)
     root = ET.Element('testsuite', name='bandit', tests=str(len(issues)))

@@ -46,7 +46,7 @@ class SafeMapper(dict):
 
 @test_properties.accepts_baseline
 def report(manager, fileobj, sev_level, conf_level, template=None):
-    """Prints issues in custom format
+    """Prints issues in custom format.
 
     :param manager: the bandit manager object
     :param fileobj: The output file object, which may be sys.stdout

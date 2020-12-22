@@ -65,10 +65,12 @@ COLOR = {
 
 
 def header(text, *args):
+    """Header for screen formatter."""
     return u'%s%s%s' % (COLOR['HEADER'], (text % args), COLOR['DEFAULT'])
 
 
 def get_verbose_details(manager):
+    """Get verbose details for screen formatter."""
     bits = []
     bits.append(header(u'Files in scope (%i):', len(manager.files_list)))
     tpl = u"\t%s (score: {SEVERITY: %i, CONFIDENCE: %i})"
@@ -81,6 +83,7 @@ def get_verbose_details(manager):
 
 
 def get_metrics(manager):
+    """Get metrics including total issues and rankings."""
     bits = []
     bits.append(header("\nRun metrics:"))
     for (criteria, _) in constants.CRITERIA:
@@ -94,7 +97,7 @@ def get_metrics(manager):
 
 def _output_issue_str(issue, indent, show_lineno=True, show_code=True,
                       lines=-1):
-    # returns a list of lines that should be added to the existing lines list
+    """Output issue str returns a list of lines that should be added to the existing lines list."""
     bits = []
     bits.append("%s%s>> Issue: [%s:%s] %s" % (
         indent, COLOR[issue.severity], issue.test_id, issue.test, issue.text))
@@ -118,6 +121,7 @@ def _output_issue_str(issue, indent, show_lineno=True, show_code=True,
 
 
 def get_results(manager, sev_level, conf_level, lines):
+    """Get results issue list."""
     bits = []
     issues = manager.get_issue_list(sev_level, conf_level)
     baseline = not isinstance(issues, list)
@@ -149,6 +153,7 @@ def get_results(manager, sev_level, conf_level, lines):
 
 
 def do_print(bits):
+    """Do print for mocking."""
     # needed so we can mock this stuff
     print('\n'.join([bit for bit in bits]))
 

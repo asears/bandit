@@ -156,7 +156,7 @@ LOG = logging.getLogger(__name__)
 
 @test_properties.accepts_baseline
 def report(manager, fileobj, sev_level, conf_level, lines=-1):
-    """Writes issues to 'fileobj' in HTML format
+    """Writes issues to 'fileobj' in HTML format.
 
     :param manager: the bandit manager object
     :param fileobj: The output file object, which may be sys.stdout
