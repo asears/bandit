@@ -69,7 +69,7 @@ def get_metrics(manager):
 
 def _output_issue_str(issue, indent, show_lineno=True, show_code=True,
                       lines=-1):
-    """Output issue str returns a list of lines that should be added to the existing lines list."""
+    """Output issue str returns a list of lines that should be added to the existing lines list."""  # noqa: E501
     bits = []
     bits.append("%s>> Issue: [%s:%s] %s" % (
         indent, issue.test_id, issue.test, issue.text))
