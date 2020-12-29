@@ -1,16 +1,18 @@
-import fixtures
-import mock
+# SPDX-License-Identifier: Apache-2.0
+
 import testtools
-from mock import MagicMock
 from bandit.core.metrics import Metrics
 
+
 class BanditCoreMetricsTests(testtools.TestCase):
-    
+
     def test_begin_begins_collection(self):
         metrics = Metrics()
         fname = "test"
-        metrics.begin(fname)
-        expected =  {'loc': 0, 'nosec': 0}
+        expected = {'loc': 0, 'nosec': 0}
+
+        metrics.begin(fname)  # act
+
         self.assertEqual(expected, metrics.data[fname])
 
     def test_note_nosec_increments_count(self):
@@ -19,9 +21,11 @@ class BanditCoreMetricsTests(testtools.TestCase):
         metrics.current['nosec'] = 1
         num = 2
         expected = 3
-        metrics.note_nosec(num)
+
+        metrics.note_nosec(num)  # act
+
         self.assertEqual(expected, metrics.current['nosec'])
-    
+
     # def test_count_locs(self):
     #     metrics = Metrics()
     #     metrics.current = {}
@@ -33,16 +37,17 @@ class BanditCoreMetricsTests(testtools.TestCase):
         metrics = Metrics()
         scores = {}
         metrics.current = {}
-        metrics.count_issues(scores)
+
+        metrics.count_issues(scores)  # act
 
     def test_aggregate(self):
         metrics = Metrics()
-        scores = {}
         metrics.data = {}
-        metrics.aggregate()
-    
+
+        metrics.aggregate()  # act
+
     def test_get_issue_counts(self):
         metrics = Metrics()
         scores = {}
-        metrics._get_issue_counts(scores)
 
+        metrics._get_issue_counts(scores)  # act
