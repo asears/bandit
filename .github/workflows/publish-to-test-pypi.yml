@@ -23,7 +23,8 @@ jobs:
 
     - name: Build a binary wheel and a source tarball
       run: |
-        python setup.py sdist bdist_wheel
+        # python setup.py sdist bdist_wheel
+        uv build
 
     - name: Publish distribution to Test PyPI
       uses: pypa/gh-action-pypi-publish@release/v1

@@ -1,0 +1,40 @@
+# Welcome to Bandit
+
+Bandit is a tool designed to find common security issues in Python code. To do
+this, Bandit processes each file, builds an AST from it, and runs appropriate
+plugins against the AST nodes.  Once Bandit has finished scanning all the files,
+it generates a report.
+
+# Using and Extending Bandit
+
+```{toctree}
+:maxdepth: 1
+
+start
+config
+plugins/index
+blacklists/index
+formatters/index
+faq
+```
+
+# Contributing
+
+- [Source code]
+- [Issue tracker]
+- Join us on [Discord]
+
+# Indices and tables
+
+- {ref}`genindex`
+- {ref}`modindex`
+- {ref}`search`
+
+# License
+
+The `bandit` library is provided under the terms and conditions of the
+[Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+[discord]: https://discord.gg/qYxpadCgkx
+[issue tracker]: https://github.com/PyCQA/bandit/issues
+[source code]: https://github.com/PyCQA/bandit

@@ -1,11 +1,17 @@
+<!-- markdownlint-disable ul-style -->
+<!-- markdownlint-disable ul-indent -->
+<!-- markdownlint-disable ol-prefix -->
 # Contributing to Bandit
+
 Thanks for considering to take part in the improvement of the Bandit project. Contributions are always welcome!
 Here are guidelines and rules that can be helpful if you plan to want to get involved in the project.
 
-#### Table Of Contents
+## Table Of Contents
+
 [Code of Conduct](#code-of-conduct)
 
 [How Can I Contribute?](#how-can-i-contribute)
+
   * [Reporting Bugs](#reporting-bugs)
   * [Suggesting Enhancements](#suggesting-enhancements)
   * [Your First Code Contribution](#your-first-code-contribution)
@@ -18,47 +24,60 @@ Here are guidelines and rules that can be helpful if you plan to want to get inv
     * [Extending Bandit](#extending-bandit)
 
 ## Code of Conduct
+
 Everyone who participates in this project is governed by the PyCQA [Code of Conduct](https://github.com/PyCQA/bandit/blob/main/CODE_OF_CONDUCT.md#contributor-covenant-code-of-conduct).
 
 ## Reporting Bugs
+
 If you encounter a bug, please let us know about it. See the guide here [GitHub issues](https://guides.github.com/features/issues/).
 
 **Before submitting a new issue** you might want to check for an [existing issue](https://github.com/PyCQA/bandit/issues) to know if there is already a reported issue. If an issue is already open please feel free
 to add a comment to the existing issue instead of creating a new one.
 
 ### Submitting your first issue
+
 We encourage using the issue template to improve quality of reported issues.
 Navigate to the issues tab and select `New issue`, then select the **Bug report** template and fill out the form.
 To submit a good bug report keep in mind to:
+
 * Use a descriptive title so other people can understand what the issue is about.
 * Be specific about the details, for example, what command did you use, what version of Bandit did you use, and in what environment you observed the bug (CI or development).
 
 ## Suggesting Enhancements
+
 If you want to suggest an enhancement, open a new issue and use the **Feature request** template.
 
 **Before submitting an enhancement** please check for existing [feature requests](https://github.com/PyCQA/bandit/issues?q=is%3Aopen+is%3Aissue+label%3Aenhancement).
 
 Useful things to point out in your feature request:
+
 * Explain your feature request in a way that everyone can understand
 * Please try to explain how this feature will improve the Bandit project
 
+## How Can I Contribute
+
 ## Your First Code Contribution
+
 You can start contributing to Bandit project by picking [bug issues](https://github.com/PyCQA/bandit/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
 These issues can be easier to resolve rather than a feature request and can get you up and running with the code base.
 
 ## Pull Requests
+
 The best way to get started with Bandit is to grab the source:
 
 Fork the repository into one with your username
+
 ```shell script
 git clone https://github.com/<your username>/bandit.git
 ```
 
 Create you own branch to start writing code:
+
 ```shell script
 git checkout -b mybranch
 git push origin mybranch
 ```
+
 You can test any changes with tox:
 
 ```shell script
@@ -68,6 +87,7 @@ tox run -e py37
 tox run -e docs
 tox run -e cover
 ```
+
 If everything is done, proceed with [opening a new pull request](https://help.github.com/en/desktop/contributing-to-projects/creating-a-pull-request)
 
 ### Commit Message Guidelines
@@ -80,7 +100,7 @@ are used to generate release notes.
 
 A good example of a commit message would be as follows:
 
-```
+```plaintext
 Summarize changes in around 50 characters or less
 
 More detailed explanatory text, if necessary. Wrap it to about 72
@@ -124,43 +144,56 @@ once a reviewer has approved your pull request.
 
 A squash can be performed as follows. Let's say you have the following commits:
 
+```plaintext
     initial commit
     second commit
     final commit
+```
 
 Run the command below with the number set to the total commits you wish to
 squash (in our case 3 commits):
 
-    git rebase -i HEAD~3
+```shell
+git rebase -i HEAD~3
+```
 
 You default text editor will then open up and you will see the following::
 
-    pick eb36612 initial commit
-    pick 9ac8968 second commit
-    pick a760569 final commit
+```shell
+  pick eb36612 initial commit
+  pick 9ac8968 second commit
+  pick a760569 final commit
 
-    # Rebase eb1429f..a760569 onto eb1429f (3 commands)
+  # Rebase eb1429f..a760569 onto eb1429f (3 commands)
+```
 
 We want to rebase on top of our first commit, so we change the other two commits
 to `squash`:
 
+```shell
     pick eb36612 initial commit
     squash 9ac8968 second commit
     squash a760569 final commit
+```
 
 After this, should you wish to update your commit message to better summarise
 all of your pull request, run:
 
+```shell
     git commit --amend
+```
 
 You will then need to force push (assuming your initial commit(s) were posted
 to github):
 
+```shell
     git push origin your-branch --force
+```
 
 ## Things You Should Know Before Getting Started
 
 ### Vulnerability Tests
+
 Vulnerability tests or "plugins" are defined in files in the plugins directory.
 
 Tests are written in Python and are autodiscovered from the plugins directory.
@@ -175,7 +208,9 @@ Test results are managed in the ``Manager`` and aggregated for
 output at the completion of a test run through the method `output_result` from ``Manager`` instance.
 
 ### Writing Tests
+
 To write a test:
+
  - Identify a vulnerability to build a test for, and create a new file in
    examples/ that contains one or more cases of that vulnerability.
  - Consider the vulnerability you're testing for, mark the function with one
@@ -194,7 +229,6 @@ To write a test:
    that it detects the vulnerability.  Consider variations on how this
    vulnerability might present itself and extend the example file and the test
    function accordingly.
-
 
 ### Extending Bandit
 
@@ -217,6 +251,7 @@ the author to register a check for a particular type of AST node. For example
 
 ::
 
+```python
     @bandit.checks('Call')
     def prohibit_unsafe_deserialization(context):
         if 'unsafe_load' in context.call_function_name_qual:
@@ -225,23 +260,28 @@ the author to register a check for a particular type of AST node. For example
                 confidence=bandit.HIGH,
                 text="Unsafe deserialization detected."
             )
+```
 
 To register your plugin, you have two options:
 
 1. If you're using setuptools directly, add something like the following to
    your ``setup`` call::
 
+```python
         # If you have an imaginary bson formatter in the bandit_bson module
         # and a function called `formatter`.
         entry_points={'bandit.formatters': ['bson = bandit_bson:formatter']}
         # Or a check for using mako templates in bandit_mako that
         entry_points={'bandit.plugins': ['mako = bandit_mako']}
+```
 
 2. If you're using pbr, add something like the following to your `setup.cfg`
    file::
 
+```ini
         [entry_points]
         bandit.formatters =
             bson = bandit_bson:formatter
         bandit.plugins =
             mako = bandit_mako
+```

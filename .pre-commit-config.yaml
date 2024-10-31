@@ -1,5 +1,6 @@
 exclude: ^(examples|tools|doc)
 repos:
+
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v5.0.0
   hooks:
@@ -7,21 +8,30 @@ repos:
   - id: debug-statements
   - id: end-of-file-fixer
   - id: trailing-whitespace
+
+# Replaced with ruff check --select "I" --fix
 - repo: https://github.com/asottile/reorder-python-imports
   rev: v3.14.0
   hooks:
   - id: reorder-python-imports
     args: [--application-directories, '.:src', --py38-plus]
+
+# Replaced with ruff format . --check
+# Note python 3.8 PEP569 EOL 2019-10-14
 - repo: https://github.com/psf/black-pre-commit-mirror
   rev: 24.10.0
   hooks:
   - id: black
     args: [--line-length=79, --target-version=py38]
+
+# Replaced with ruff check --select "UP" --fix?
 - repo: https://github.com/asottile/pyupgrade
   rev: v3.19.0
   hooks:
   - id: pyupgrade
     args: [--py38-plus]
+
+
 - repo: https://github.com/jorisroovers/gitlint
   rev: v0.19.1
   hooks:

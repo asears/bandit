@@ -1,0 +1,240 @@
+[project]
+name = "bandit"
+description = "Security oriented static analyser for python code."
+version = "1.7.11.dev13"
+# dynamic = ["version"]
+readme = "README.md"
+# license = "Apache License 2.0"
+license = {file="LICENSE"}
+requires-python = ">=3.9"
+
+authors = [
+    { name = "PyCQA", email = "code-quality@python.org" },
+]
+
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS :: MacOS X",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Security",
+]
+
+dependencies = [
+    # The order of packages is significant, because pip processes them in the order
+    # of appearance. Changing the order has an impact on the overall integration
+    # process, which may cause wedges in the gate later.
+    'PyYAML>=5.3.1', # MIT
+    'stevedore>=1.20.0', # Apache-2.0
+    'colorama>=0.3.9;platform_system=="Windows"', # BSD License (3 clause)
+    'rich', # MIT
+]
+
+[project.urls]
+homepage = "https://bandit.readthedocs.io/"
+"Documentation" = "https://bandit.readthedocs.io/"
+"Release Notes" = "https://github.com/PyCQA/bandit/releases"
+"Source Code" = "https://github.com/PyCQA/bandit"
+"Issue Tracker" = "https://github.com/PyCQA/bandit/issues"
+"Discord" = "https://discord.gg/qYxpadCgkx"
+"Sponsor" = "https://psfmember.org/civicrm/contribute/transact/?reset=1&id=42"
+
+
+[project.optional-dependencies]
+yaml = ["PyYAML"]
+toml = ["tomli>=1.1.0; python_version < '3.11'"]
+baseline = ["GitPython>=3.1.30"]
+sarif = ["sarif-om>=1.0.4", "jschema-to-python>=1.2.3"]
+
+build = [
+    "tox",
+]
+
+test = [
+    "coverage>=4.5.4", # Apache-2.0
+    "fixtures>=3.0.0", # Apache-2.0/BSD
+    "flake8>=4.0.0", # Apache-2.0
+    "stestr>=2.5.0", # Apache-2.0
+    "testscenarios>=0.5.0", # Apache-2.0/BSD
+    "testtools>=2.3.0", # MIT
+    "beautifulsoup4>=4.8.0", # MIT
+    "pylint==1.9.4", # GPLv2
+]
+
+
+[project.scripts]
+bandit = "bandit.cli.main:main"
+bandit-config-generator = "bandit.cli.config_generator:main"
+bandit-baseline = "bandit.cli.baseline:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "bandit/*.py",
+]
+
+# exclude = [
+#   "*.json",
+#   "pkg/_compat.py",
+# ]
+
+[tool.bandit.blacklists]
+calls = "bandit.blacklists.calls:gen_blacklist"
+imports = "bandit.blacklists.imports:gen_blacklist"
+
+[tool.bandit.formatters]
+csv = "bandit.formatters.csv:report"
+json = "bandit.formatters.json:report"
+txt = "bandit.formatters.text:report"
+xml = "bandit.formatters.xml:report"
+html = "bandit.formatters.html:report"
+sarif = "bandit.formatters.sarif:report"
+screen = "bandit.formatters.screen:report"
+
+[tool.pylint]
+# Messages Control
+disable = [
+    "C0103", "C0114", "C0115", "C0116", "C0201", "C0206", "C0209", "C0301",
+    "C0413", "C0415", "C1802", "F0401", "W0511", "W0622", "E0611", "E1101",
+    "R0801", "R0902", "R0912", "R0913", "R0914", "R0915", "R1702", "R1705",
+    "R1710", "R1714", "R1721", "R1732", "R1734", "R1735", "W0105", "W0201",
+    "W0212", "W0246", "W0603", "W0612", "W0613", "W0621", "W0707", "W0718",
+    "W1201", "W1203", "W1404", "W1514"
+]
+
+# Basic
+variable-rgx = "[a-z_][a-z0-9_]{0,30}$"
+argument-rgx = "[a-z_][a-z0-9_]{1,30}$"
+method-rgx = "([a-z_][a-z0-9_]{2,50}|setUp|tearDown)$"
+module-rgx = "(([a-z_][a-z0-9_]*)|([A-Z][a-zA-Z0-9]+)|(manila-[a-z0-9_-]+))$"
+no-docstring-rgx = "((__.*__)|([tT]est.*)|setUp|tearDown)$"
+
+# Design
+max-public-methods = 100
+min-public-methods = 0
+max-args = 6
+
+# Variables
+additional-builtins = "_"
+
+# Similarities
+min-similarity-lines = 10
+ignore-comments = true
+ignore-docstrings = true
+ignore-imports = true
+
+# Paths to ignore
+ignore-paths = ["examples"]
+
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+    # project-specific
+    "examples/*",
+]
+
+# Same as Black.
+line-length = 79  # customized based on pre-commit from default of 88
+indent-width = 4
+
+# Assume Python 3.8
+# Note EOL PEP 569 2019-10-14
+target-version = "py38"
+
+[tool.ruff.lint]
+preview = true
+# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
+# Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
+# McCabe complexity (`C901`) by default.
+# defaults
+# select = ["E4", "E7", "E9", "F"]
+select = ["ALL"]
+# ignore = [
+#     "C0103", "C0114", "C0115", "C0116", "C0201", "C0206", "C0209", "C0301",
+#     "C0413", "C0415", "C1802", "F0401", "W0511", "W0622", "E0611", "E1101",
+#     "R0801", "R0902", "R0912", "R0913", "R0914", "R0915", "R1702", "R1705",
+#     "R1710", "R1714", "R1721", "R1732", "R1734", "R1735", "W0105", "W0201",
+#     "W0212", "W0246", "W0603", "W0612", "W0613", "W0621", "W0707", "W0718",
+#     "W1201", "W1203", "W1404", "W1514"
+# ]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+preview = true
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+# Enable auto-formatting of code examples in docstrings. Markdown,
+# reStructuredText code/literal blocks and doctests are all supported.
+#
+# This is currently disabled by default, but it is planned for this
+# to be opt-out in the future.
+docstring-code-format = false
+
+# Set the line length limit used when formatting code snippets in
+# docstrings.
+#
+# This only has an effect when the `docstring-code-format` setting is
+# enabled.
+docstring-code-line-length = "dynamic"
+
+[tool.stestr]
+test_path="${OS_TEST_PATH:-./tests}"
+top_dir="./"
+group_regex=".*(test_cert_setup)"
