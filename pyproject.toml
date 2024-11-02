@@ -71,6 +71,7 @@ test = [
     "testtools>=2.3.0", # MIT
     "beautifulsoup4>=4.8.0", # MIT
     "pylint==1.9.4", # GPLv2
+    # "sarif-om"
 ]
 
 
